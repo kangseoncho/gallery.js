@@ -23,12 +23,9 @@ class App extends Component {
         {/* search bar and logo */}
         <div id='navBar'>
           <span id="logo">Gallery.js</span>
-          <span id="searchBar"> <input type="text"></input> </span>
         </div>
         {/*images*/}
-        <div id="gallery">
-          <Image gallery={this.state.gallery}/>
-        </div>
+          <Image gallery={this.state.gallery} />
       </div>
     )
   }

@@ -1,5 +1,53 @@
 @import '_variables';
 
 body {
-  background-color: $testVariable;
+  margin: 0;
+  padding: 0;
+}
+
+//desktop
+@media (min-width: 767px) {
+  #navBar {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  #gallery {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+
+    .painting {
+      width: 256px;
+      height: 300px;
+      text-align: center;
+      margin: $deskImageMargin;
+
+      .image {
+        img {
+          max-height: $paintingMaxHeight;
+        }
+      }
+    }
+  }
+}
+
+//mobile
+@media (max-width: 767px) {
+  body {
+    text-align: center;
+  }
+
+  #gallery {
+
+    .image {
+      margin: {
+        top: $mobImageMargin;
+        bottom: $mobImageMargin;
+      }
+    }
+  }
 }
