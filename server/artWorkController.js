@@ -19,7 +19,7 @@ const artWorkController = {
       request(options, (err, res, body) => callback(err, body))
     }
     axios.get('https://appsheettest1.azurewebsites.net/sample/art/', {headers: {"Access-Control-Allow-Origin": "*"}})
-    .then(listOfIDs => listOfIDs.data.filter((allIDs) => allIDs <= 200))
+    .then(listOfIDs => listOfIDs.data.filter((allIDs) => allIDs <= 700))
     .then(filteredIDs => {
       let idsToCall = filteredIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`)
       async.map(idsToCall, getRequest, (err, result) => {

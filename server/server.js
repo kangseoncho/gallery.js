@@ -1,11 +1,11 @@
-//house all middleware functions
-const ArtWorkController = require('./artWorkController');
-
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const port = 3000;
+
+//house all middleware functions
+const ArtWorkController = require('./artWorkController');
 
 app.use(bodyParser.json());
 
