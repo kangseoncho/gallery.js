@@ -31,7 +31,7 @@ const artWorkController = {
       })
     })
     .then(filteredIDs => {
-      app.locals.numberOfLoads += 12;
+      app.locals.numberOfLoads = 12;
       let idsToCall = filteredIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`)
       async.map(idsToCall, getRequest, (err, result) => {
         if(err) return err;
