@@ -1,11 +1,13 @@
+//house all middleware functions
+const ArtWorkController = require('./artWorkController');
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
 const port = 3000;
 
-//house all middleware functions
-const ArtWorkController = require('./artWorkController');
+//app.locals.numberOfLoads = 0;
 
 app.use(bodyParser.json());
 
@@ -15,6 +17,7 @@ app.get('/', (req, res) => { return });
 
 //get all list of IDs
 app.get('/ids', ArtWorkController.retrieveIDs);
+app.get('/initialGallery', ArtWorkController.retrieveInitialArts)
 //get artwork information with IDs
 app.get('/gallery', ArtWorkController.retrieveArts);
 
