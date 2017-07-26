@@ -10,16 +10,31 @@ body {
 //desktop
 @media (min-width: 767px) {
   #navBar {
-    font-size: 40px;
     width: 100%;
     position: fixed;
     background-color: white;
-    height: 15%;
+    height: 25%;
     top: 0;
 
     #logo {
+      font-size: 40px;
       position: relative;
       top: 25%;
+    }
+
+    #menu {
+      position: relative;
+      top: 40%;
+      left: 10%;
+      display: flex;
+
+      #searchBar {
+        font-size: 24px;
+        input {
+          height: 24px;
+          font-size: 24px;
+        }
+      }
     }
   }
 
@@ -42,6 +57,7 @@ body {
       margin: $deskImageMargin;
 
       .image {
+        cursor: pointer;
         img {
           max-height: $paintingMaxDimension;
           max-width: $paintingMaxDimension;
@@ -61,6 +77,19 @@ body {
   }
 
   #loadImages {
+    margin: {
+      top: 1%;
+      bottom: 2%;
+    }
+    button {
+      background-color: white;
+      border: none;
+      height: 50px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+  #scrollToTop {
     button {
       background-color: white;
       border: none;
@@ -74,14 +103,14 @@ body {
 //mobile
 @media (max-width: 767px) {
   #navBar {
-    font-size: 30px;
-
     width: 100%;
     position: fixed;
     top: 0;
     background-color: white;
     height: 15%;
+
     #logo {
+      font-size: 30px;
       position: relative;
       top: 25%;
     }
@@ -98,6 +127,10 @@ body {
       margin: {
         top: $mobImageMargin;
         bottom: ($mobImageMargin + 3%);
+      }
+
+      .image {
+        cursor: pointer;
       }
     }
   }

@@ -5,7 +5,7 @@ const Image = (props) => {
     return (
       <div className="painting" key={index}>
 
-        <div className="image">
+        <div className="image" onClick={()=>{window.open(element.url)}}>
           <img src={element.thumbnailUrl} alt="paintings"></img>
         </div>
 
