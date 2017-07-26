@@ -17,11 +17,14 @@ app.get('/', (req, res) => { return });
 
 //get all list of IDs
 app.get('/ids', ArtWorkController.retrieveIDs);
-app.get('/initialGallery', ArtWorkController.retrieveInitialArts)
-//get artwork information with IDs
+//set state for displaying initial artworks
+app.get('/initialGallery', ArtWorkController.retrieveInitialArts);
+//get additional artworks
 app.get('/gallery', ArtWorkController.retrieveArts);
+//search for requested artist
+app.get('/searchArtist', ArtWorkController.searchArtist);
 
 app.listen(3000, () => {
   console.log("direectory name: ", __dirname);
-  console.log(`listening on port ${port}!`)
+  console.log(`listening on port ${port}!`);
 });
