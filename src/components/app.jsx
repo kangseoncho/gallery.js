@@ -16,11 +16,15 @@ class App extends Component {
     this.scrollToTop = this.scrollToTop.bind(this);
     this.updateSearch = this.updateSearch.bind(this);
     this.getArtist = this.getArtist.bind(this);
+    this.backToHome = this.backToHome.bind(this);
   }
 
   componentDidMount() {
     axios.get('http://localhost:3000/initialGallery')
     .then(res => this.setState({ gallery: res.data }));
+
+    axios.get('http://localhost:3000/ids')
+    .then(res => res.data);
   }
 
   artistName (string) {
@@ -62,9 +66,13 @@ class App extends Component {
       })
     })
     .then(matchingData => {
-      console.log(matchingData)
       this.setState({ gallery: matchingData });
     })
+  }
+
+  backToHome() {
+    axios.get('http://localhost:3000/initialGallery')
+    .then(res => this.setState({ gallery: res.data }));
   }
 
   render() {
@@ -72,14 +80,15 @@ class App extends Component {
     return (
       <div>
         {/* navigation bar */}
-        <NavBar searchArtist={this.state.searchArtist} updateSearch={this.updateSearch} getArtist={this.getArtist}/>
+        <NavBar searchArtist={this.state.searchArtist} updateSearch={this.updateSearch} getArtist={this.getArtist}
+          backToHome={this.backToHome}/>
 
         {/*images*/}
         <Image gallery={this.state.gallery} artistName={this.artistName}/>
 
         {/* button to scroll to top of page */}
         <div id="scrollToTop">
-          <button onClick={() => {this.scrollToTop()}}>scroll to top</button>
+          <button onClick={() => {this.scrollToTop()}}>Scroll to Top</button>
         </div>
         {/* button to load more artworks */}
          <div id='loadImages'>

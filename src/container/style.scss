@@ -25,14 +25,38 @@ body {
     #menu {
       position: relative;
       top: 40%;
-      left: 10%;
+      left: 5%;
       display: flex;
+
+      div {
+        margin: {
+          right: 5%;
+        }
+      }
 
       #searchBar {
         font-size: 24px;
+
         input {
           height: 24px;
           font-size: 24px;
+        }
+        button {
+          background-color: white;
+          border: none;
+          // height: 24px;
+          // width: 24px;
+          font-size: 24px;
+          cursor: pointer;
+        }
+      }
+
+      #back {
+        button {
+          background-color: white;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
         }
       }
     }

@@ -14,7 +14,7 @@ const Image = (props) => {
         </div>
 
         <div className="artist">
-           {props.artistName(element.artist)}
+           <strong>{props.artistName(element.artist)}</strong>
         </div>
 
         <div className="year">
