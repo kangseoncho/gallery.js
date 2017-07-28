@@ -143,8 +143,10 @@ body {
 
   #modalContainer {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    // justify-content: space-between;
+    // align-items: flex-start;
+
+    width: 100%;
 
     .modalContent {
       margin: {
@@ -153,17 +155,20 @@ body {
       span {
         color: grey;
         font-size: $deskModalFontSize;
+        padding-bottom: 10%;
       }
     }
 
     #modalArt {
+      width: 35%;
       img {
-        width: 150%;
-        height: auto;
+        // width: 100%;
+        // height: auto;
       }
     }
 
     #artInformation {
+      width: 35%;
 
       #externalLink {
         color: $externalLinkColor;
@@ -173,6 +178,9 @@ body {
     }
 
     #modalExitButton {
+      width: 30%;
+      text-align: right;
+
       .exitModal {
         border: none;
         font-size: 30px;
@@ -292,6 +300,47 @@ body {
       height: 30px;
       font-size: $mobFooterFontSize;
       cursor: pointer;
+    }
+  }
+
+  #modalContainer {
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .modalContent {
+      margin: {
+        top: 3%;
+      }
+      span {
+        color: grey;
+        font-size: $mobModalFontSize;
+      }
+    }
+
+    #modalArt {
+      width: 100%;
+    }
+
+    #artInformation {
+
+      #externalLink {
+        color: $externalLinkColor;
+        font-size: $mobModalFontSize;
+        cursor: pointer;
+      }
+    }
+
+    #modalExitButton {
+      position: absolute;
+      top: 0;
+      right: 0;
+      .exitModal {
+        border: none;
+        font-size: ($mobModalFontSize + 2px);
+        background-color: transparent;
+        color: grey;
+        cursor: pointer;
+      }
     }
   }
 

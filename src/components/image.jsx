@@ -29,15 +29,9 @@ const Image = (props) => {
 
   return (
     <div id="gallery">
-      <ReactModal
-        isOpen={props.showModal}
-        contentLabel="Art Information Modal"
-      >
-        <ImageModal
-          infoForModal={props.infoForModal}
-          artistName={props.artistName}
-          closeModal={props.closeModal}
-        />
+      <ReactModal isOpen={props.showModal} contentLabel="Art Information Modal">
+        <ImageModal infoForModal={props.infoForModal} artistName={props.artistName}
+          closeModal={props.closeModal}/>
       </ReactModal>
 
       {thumbnails}

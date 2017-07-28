@@ -43,7 +43,11 @@ class App extends Component {
       axios.get('http://localhost:3000/initialGallery')
       .then(res => {
         this.setState({ gallery: res.data });
-      });
+      })
+      .then(res => {
+        axios.get('http://localhost:3000/allArtist')
+        .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
+      })
     })
 
     // axios.get('http://localhost:3000/ids')
@@ -73,9 +77,6 @@ class App extends Component {
 
   //go to top of the artwork list
   scrollToTop () {
-    // let x = window.scrollX, y = window.scrollY;
-    // console.log('y-coordinate', y)
-    // setInterval(() => {  },10)
     window.scrollTo(0, 0);
   }
 
@@ -92,6 +93,7 @@ class App extends Component {
     this.setState({ gallery:matchingArtists });
   }
 
+  //back to the home page
   backToHome() {
     axios.get('http://localhost:3000/home')
     .then(res => {
