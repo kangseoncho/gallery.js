@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Image from './image.jsx';
 import NavBar from './navbar.jsx';
+import Footer from './footer.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       gallery: [],
-      searchArtist: ''
+      searchField: ''
     };
     //list of functions to pass down
     this.loadMoreArt = this.loadMoreArt.bind(this);
@@ -26,10 +27,11 @@ class App extends Component {
     });
 
     axios.get('http://localhost:3000/ids')
-    .then(res => localStorage.setItem('id', JSON.stringify(res.data)) );
-
-    axios.get('http://localhost:3000/allArtist')
-    .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
+    .then(res => localStorage.setItem('id', JSON.stringify(res.data)) )
+    .then(res => {
+      axios.get('http://localhost:3000/allArtist')
+      .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
+    })
   }
 
   artistName (string) {
@@ -59,7 +61,7 @@ class App extends Component {
 
   //update Search field
   updateSearch(event) {
-    this.setState({ searchArtist:event.target.value });
+    this.setState({ searchField:event.target.value });
   }
 
   //find artist according to search field
@@ -72,27 +74,26 @@ class App extends Component {
 
   backToHome() {
     axios.get('http://localhost:3000/initialGallery')
-    .then(res => this.setState({ gallery: res.data }));
+    .then(res => {
+      this.setState({
+        gallery: res.data,
+        searchField: ''
+      })
+    });
   }
 
   render() {
     return (
       <div>
         {/* navigation bar */}
-        <NavBar searchArtist={this.state.searchArtist} updateSearch={this.updateSearch} getArtist={this.getArtist}
+        <NavBar searchField={this.state.searchField} updateSearch={this.updateSearch} getArtist={this.getArtist}
           backToHome={this.backToHome} scrollToTop={this.scrollToTop}/>
 
         {/*images*/}
         <Image gallery={this.state.gallery} artistName={this.artistName}/>
 
-        {/* button to scroll to top of page */}
-        <div id="scrollToTop">
-          <button onClick={() => {this.scrollToTop()}}>Top</button>
-        </div>
-        {/* button to load more artworks */}
-         <div id='loadImages'>
-          <button onClick={() => {this.loadMoreArt()}}>More Result</button>
-         </div>
+        {/* footer */}
+        <Footer scrollToTop={this.scrollToTop} loadMoreArt={this.loadMoreArt} searchField={this.state.searchField}/>
       </div>
     )
   }
