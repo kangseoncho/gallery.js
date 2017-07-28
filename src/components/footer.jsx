@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Footer = (props) => {
-  if (props.searchField.length === 0) {
+  // if (props.searchField) {
     return (
       <div>
         {/* button to scroll to top of page */}
@@ -14,16 +14,16 @@ const Footer = (props) => {
         </div>
       </div>
     )
-  } else {
-    return (
-    <div>
-      {/* button to scroll to top of page */}
-      <div id="scrollToTop">
-        <button onClick={() => { props.scrollToTop() }}>Top</button>
-      </div>
-    </div>
-  )
-  }
+  // } else {
+  //   return (
+  //   <div>
+  //     {/* button to scroll to top of page */}
+  //     <div id="scrollToTop">
+  //       <button onClick={() => { props.scrollToTop() }}>Top</button>
+  //     </div>
+  //   </div>
+  // )
+  // }
 }
 
 export default Footer;

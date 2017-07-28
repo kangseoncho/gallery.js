@@ -18,6 +18,10 @@ const NavBar = (props) => {
              <img src="https://image.flaticon.com/icons/png/512/49/49116.png" alt="search"></img>
           </button>
         </div>
+
+        <div id="yearCategory">
+          <button type="text">Search By year</button>
+        </div>
       </div>
 
     </div>

@@ -3,7 +3,6 @@ const async = require('async');
 const request = require('request');
 const app = require('express')();
 
-app.locals.numberOfLoads = 0;
 app.locals.cachedIDs;
 
 const artWorkController = {
@@ -28,7 +27,6 @@ const artWorkController = {
       request(options, (err, res, body) => callback(err, body));
     }
     let idsToCall = app.locals.cachedIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`);
-    //let filteredIDs = idsToCall.filter((element, index) => index < 50)
     async.map(idsToCall, getRequest, (err, result) => {
       if (err) return err;
       return res.json(result);

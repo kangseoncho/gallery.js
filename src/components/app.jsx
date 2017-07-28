@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       gallery: [],
       searchField: '',
-      loadBatch: 1
+      loadBatch: 1,
+      yearToLook: undefined
     };
     //list of functions to pass down
     this.loadMoreArt = this.loadMoreArt.bind(this);
@@ -19,6 +20,7 @@ class App extends Component {
     this.updateSearch = this.updateSearch.bind(this);
     this.getArtist = this.getArtist.bind(this);
     this.backToHome = this.backToHome.bind(this);
+    this.searchByYear = this.searchByYear.bind(this);
   }
 
   componentDidMount() {
@@ -93,21 +95,23 @@ class App extends Component {
     const tempGallery = JSON.parse(localStorage.getItem('artists')).filter((element, index) => index < 12)
     this.setState({
       gallery: tempGallery,
-      searchField: ''
+      searchField: '',
+      loadBatch: 1
     });
+  }
+
+  searchByYear() {
+
   }
 
   render() {
     return (
       <div>
-        {/* navigation bar */}
         <NavBar searchField={this.state.searchField} updateSearch={this.updateSearch} getArtist={this.getArtist}
-          backToHome={this.backToHome} scrollToTop={this.scrollToTop}/>
+          backToHome={this.backToHome} scrollToTop={this.scrollToTop} searchByYear={this.searchByYear}/>
 
-        {/*images*/}
         <Image gallery={this.state.gallery} artistName={this.artistName}/>
 
-        {/* footer */}
         <Footer scrollToTop={this.scrollToTop} loadMoreArt={this.loadMoreArt} searchField={this.state.searchField}/>
       </div>
     )
