@@ -4,20 +4,19 @@ const NavBar = (props) => {
   return (
     <div id='navBar'>
 
-      <div id="logo">Gallery.js</div>
+      <div id="logo" onClick={() => {props.backToHome(); props.scrollToTop()}}>Gallery.js</div>
 
       <div id="menu">
         <div id="back">
-          <button type="button" onClick={() => {props.backToHome()}}>Back To Gallery</button>
+          <button type="button" onClick={() => {props.backToHome()}}>Home</button>
         </div>
 
         <div id='searchBar'>
-          Search by Artist: <input type="text" onChange={props.updateSearch} placeholder="Last Name, First Name">
+          <input type="text" onChange={props.updateSearch} placeholder="Search Artist">
             {/* {props.searchArtist} */}
           </input>
           <button id="searchSubmit" type='submit' onClick={() => {props.getArtist(props.searchArtist)}}>
-            {/* <img src="./../images/searchIcon.png" alt="search"></img> */}
-            Search
+             <img src="https://image.flaticon.com/icons/png/512/49/49116.png" alt="search"></img>
           </button>
         </div>
       </div>

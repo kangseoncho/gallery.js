@@ -21,10 +21,15 @@ class App extends Component {
 
   componentDidMount() {
     axios.get('http://localhost:3000/initialGallery')
-    .then(res => this.setState({ gallery: res.data }));
+    .then(res => {
+      this.setState({ gallery: res.data });
+    });
 
     axios.get('http://localhost:3000/ids')
-    .then(res => res.data);
+    .then(res => localStorage.setItem('id', JSON.stringify(res.data)) );
+
+    axios.get('http://localhost:3000/allArtist')
+    .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
   }
 
   artistName (string) {
@@ -59,15 +64,10 @@ class App extends Component {
 
   //find artist according to search field
   getArtist (search) {
-    axios.get('http://localhost:3000/searchArtist')
-    .then(matchingArtist => {
-      return matchingArtist.data.filter((data, index) => {
-        return data.artist.toLowerCase().includes(search.toLowerCase());
-      })
+    const matchingArtists = JSON.parse(localStorage.getItem('artists')).filter((artInfo, index) => {
+      return artInfo.artist.toLowerCase().includes(search.toLowerCase());
     })
-    .then(matchingData => {
-      this.setState({ gallery: matchingData });
-    })
+    this.setState({ gallery:matchingArtists });
   }
 
   backToHome() {
@@ -76,23 +76,22 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div>
         {/* navigation bar */}
         <NavBar searchArtist={this.state.searchArtist} updateSearch={this.updateSearch} getArtist={this.getArtist}
-          backToHome={this.backToHome}/>
+          backToHome={this.backToHome} scrollToTop={this.scrollToTop}/>
 
         {/*images*/}
         <Image gallery={this.state.gallery} artistName={this.artistName}/>
 
         {/* button to scroll to top of page */}
         <div id="scrollToTop">
-          <button onClick={() => {this.scrollToTop()}}>Scroll to Top</button>
+          <button onClick={() => {this.scrollToTop()}}>Top</button>
         </div>
         {/* button to load more artworks */}
          <div id='loadImages'>
-          <button onClick={() => {this.loadMoreArt()}}>Load More Artworks</button>
+          <button onClick={() => {this.loadMoreArt()}}>More Result</button>
          </div>
       </div>
     )

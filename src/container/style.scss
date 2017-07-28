@@ -13,6 +13,7 @@ body {
     width: 100%;
     position: fixed;
     background-color: white;
+    opacity: 75%;
     height: 25%;
     top: 0;
 
@@ -20,6 +21,7 @@ body {
       font-size: 40px;
       position: relative;
       top: 25%;
+      cursor: pointer;
     }
 
     #menu {
@@ -31,6 +33,15 @@ body {
       div {
         margin: {
           right: 5%;
+        }
+      }
+
+      #back {
+        button {
+          background-color: white;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
         }
       }
 
@@ -51,12 +62,11 @@ body {
         }
       }
 
-      #back {
-        button {
-          background-color: white;
-          border: none;
-          font-size: 24px;
-          cursor: pointer;
+      #searchSubmit {
+
+        img {
+          height: 24px;
+          width: 24px;
         }
       }
     }
@@ -166,6 +176,25 @@ body {
       height: 40px;
       font-size: 20px;
       cursor: pointer;
+    }
+  }
+
+  #back {
+
+    button {
+      background-color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+
+  #searchBar {
+    #searchSubmit {
+      img {
+        height: 20px;
+        width: 20px;
+      }
     }
   }
 }
