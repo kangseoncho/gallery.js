@@ -23,6 +23,9 @@ app.get('/initialGallery', ArtWorkController.retrieveInitialArts);
 app.get('/gallery', ArtWorkController.retrieveArts);
 //search for requested artist
 app.get('/searchArtist', ArtWorkController.searchArtist);
+//cache all art info into local storage
+app.get('/allArtist', ArtWorkController.cachedArtInfo);
+
 
 app.listen(3000, () => {
   console.log("direectory name: ", __dirname);
