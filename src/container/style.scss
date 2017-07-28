@@ -13,8 +13,7 @@ body {
     width: 100%;
     position: fixed;
     background-color: white;
-    opacity: 75%;
-    height: 25%;
+    height: 20%;
     top: 0;
 
     #logo {
@@ -69,6 +68,15 @@ body {
           width: 24px;
         }
       }
+
+      #yearCategory {
+        button {
+          background-color: white;
+          border: none;
+          font-size: 24px;
+          cursor: pointer;
+        }
+      }
     }
   }
 
@@ -81,7 +89,7 @@ body {
 
     //position: relative;
     margin: {
-      top: 15%;
+      top: 25%;
     }
 
     .painting {
@@ -118,8 +126,8 @@ body {
     button {
       background-color: white;
       border: none;
-      height: 50px;
-      font-size: 30px;
+      height: $deskFooterHeight;
+      font-size: $deskFooterFontSize;
       cursor: pointer;
     }
   }
@@ -127,9 +135,51 @@ body {
     button {
       background-color: white;
       border: none;
-      height: 50px;
-      font-size: 30px;
+      height: $deskFooterHeight;
+      font-size: $deskFooterFontSize;
       cursor: pointer;
+    }
+  }
+
+  #modalContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .modalContent {
+      margin: {
+        top: 5%;
+      }
+      span {
+        color: grey;
+        font-size: $deskModalFontSize;
+      }
+    }
+
+    #modalArt {
+      img {
+        width: 150%;
+        height: auto;
+      }
+    }
+
+    #artInformation {
+
+      #externalLink {
+        color: $externalLinkColor;
+        font-size: $deskModalFontSize;
+        cursor: pointer;
+      }
+    }
+
+    #modalExitButton {
+      .exitModal {
+        border: none;
+        font-size: 30px;
+        background-color: white;
+        color: grey;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -142,16 +192,70 @@ body {
     top: 0;
     background-color: white;
     height: 15%;
+    display: flex;
 
     #logo {
+      left: 15%;
       font-size: 30px;
       position: relative;
       top: 25%;
+      cursor: pointer;
+    }
+
+    #menu {
+      text-align: left;
+      position: relative;
+      top: 10%;
+      left: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+      #back {
+        button {
+          background-color: white;
+          border: none;
+          font-size: $mobNavBarFontSize;
+          cursor: pointer;
+        }
+      }
+
+      #searchBar {
+        font-size: $mobNavBarFontSize;
+
+        input {
+          height: $mobNavBarFontSize;
+          font-size: $mobNavBarFontSize;
+          width: 100px;
+        }
+        button {
+          background-color: white;
+          border: none;
+          font-size: $mobNavBarFontSize;
+          cursor: pointer;
+        }
+      }
+
+      #searchSubmit {
+
+        img {
+          height: 16px;
+          width: 16px;
+        }
+      }
+
+      #yearCategory {
+        button {
+          background-color: white;
+          border: none;
+          font-size: $mobNavBarFontSize;
+          cursor: pointer;
+        }
+      }
     }
   }
 
   #gallery {
-
     //position: relative;
     margin: {
       top: 15%;
@@ -170,31 +274,25 @@ body {
   }
 
   #loadImages {
+    margin: {
+      bottom: 1%;
+    }
     button {
       background-color: white;
       border: none;
-      height: 40px;
-      font-size: 20px;
+      height: 30px;
+      font-size: $mobFooterFontSize;
+      cursor: pointer;
+    }
+  }
+  #scrollToTop {
+    button {
+      background-color: white;
+      border: none;
+      height: 30px;
+      font-size: $mobFooterFontSize;
       cursor: pointer;
     }
   }
 
-  #back {
-
-    button {
-      background-color: white;
-      border: none;
-      font-size: 20px;
-      cursor: pointer;
-    }
-  }
-
-  #searchBar {
-    #searchSubmit {
-      img {
-        height: 20px;
-        width: 20px;
-      }
-    }
-  }
 }

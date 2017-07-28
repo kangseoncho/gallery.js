@@ -8,7 +8,7 @@ const NavBar = (props) => {
 
       <div id="menu">
         <div id="back">
-          <button type="button" onClick={() => {props.backToHome()}}>Home</button>
+          <button type="button" onClick={() => {props.backToHome(); props.scrollToTop()}}>Home</button>
         </div>
 
         <div id='searchBar'>

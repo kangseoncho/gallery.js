@@ -9,7 +9,9 @@ class App extends Component {
     super(props);
     this.state = {
       gallery: [],
-      searchField: ''
+      searchField: '',
+      showModal: false,
+      infoForModal: {}
     };
     //list of functions to pass down
     this.loadMoreArt = this.loadMoreArt.bind(this);
@@ -18,20 +20,38 @@ class App extends Component {
     this.updateSearch = this.updateSearch.bind(this);
     this.getArtist = this.getArtist.bind(this);
     this.backToHome = this.backToHome.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.getInfoForModal = this.getInfoForModal.bind(this);
+  }
+
+  closeModal() {
+    this.setState({showModal: false});
+  }
+  openModal() {
+    this.setState({showModal: true});
+  }
+  getInfoForModal(info) {
+    this.setState({infoForModal: info});
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/initialGallery')
-    .then(res => {
-      this.setState({ gallery: res.data });
-    });
-
+    //call the neccesary server routes to get initial info started
     axios.get('http://localhost:3000/ids')
-    .then(res => localStorage.setItem('id', JSON.stringify(res.data)) )
     .then(res => {
-      axios.get('http://localhost:3000/allArtist')
-      .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
+      localStorage.setItem('id', JSON.stringify(res.data));
+      axios.get('http://localhost:3000/initialGallery')
+      .then(res => {
+        this.setState({ gallery: res.data });
+      });
     })
+
+    // axios.get('http://localhost:3000/ids')
+    // .then(res => localStorage.setItem('id', JSON.stringify(res.data)) )
+    // .then(res => {
+    //   axios.get('http://localhost:3000/allArtist')
+    //   .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
+    // })
   }
 
   artistName (string) {
@@ -73,7 +93,7 @@ class App extends Component {
   }
 
   backToHome() {
-    axios.get('http://localhost:3000/initialGallery')
+    axios.get('http://localhost:3000/home')
     .then(res => {
       this.setState({
         gallery: res.data,
@@ -90,7 +110,9 @@ class App extends Component {
           backToHome={this.backToHome} scrollToTop={this.scrollToTop}/>
 
         {/*images*/}
-        <Image gallery={this.state.gallery} artistName={this.artistName}/>
+        <Image gallery={this.state.gallery} artistName={this.artistName}
+          openModal={this.openModal} closeModal={this.closeModal} showModal={this.state.showModal} getInfoForModal={this.getInfoForModal}
+          infoForModal={this.state.infoForModal} artistName={this.artistName}/>
 
         {/* footer */}
         <Footer scrollToTop={this.scrollToTop} loadMoreArt={this.loadMoreArt} searchField={this.state.searchField}/>
