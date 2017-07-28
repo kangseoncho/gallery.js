@@ -20,11 +20,13 @@ app.get('/ids', ArtWorkController.retrieveIDs);
 //set state for displaying initial artworks
 app.get('/initialGallery', ArtWorkController.retrieveInitialArts);
 //get additional artworks
-app.get('/gallery', ArtWorkController.retrieveArts);
+app.get('/gallery', ArtWorkController.retrieveAdditionalArts);
 //search for requested artist
 app.get('/searchArtist', ArtWorkController.searchArtist);
 //cache all art info into local storage
 app.get('/allArtist', ArtWorkController.cachedArtInfo);
+//take me back to main page
+app.get('/home', ArtWorkController.homePage);
 
 
 app.listen(3000, () => {
