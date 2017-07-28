@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Image from './image.jsx';
 import NavBar from './navbar.jsx';
+import Image from './image.jsx';
 import Footer from './footer.jsx';
 
 class App extends Component {
@@ -22,6 +22,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    //set up initial 12 images, caching takes too long to use that to set initial state
+    axios.get('http://localhost:3000/initialGallery')
+    .then(res => {
+      this.setState({gallery: res.data});
+    })
+
+    //cache all art information in local storage
     axios.get('http://localhost:3000/ids')
     .then(res => localStorage.setItem('id', JSON.stringify(res.data)) )
     .then(res => {
@@ -30,11 +37,11 @@ class App extends Component {
         localStorage.setItem('artists', JSON.stringify(res.data))
         return JSON.parse( localStorage.getItem('artists') );
       })
-      .then(cachedInfo => {
-        //console.log("cached Info: ", cachedInfo)
-        const initialDisplay = cachedInfo.filter((info, index) => index < 12);
-        this.setState({gallery: initialDisplay});
-      })
+      // .then(cachedInfo => {
+      //   //console.log("cached Info: ", cachedInfo)
+      //   const initialDisplay = cachedInfo.filter((info, index) => index < 12);
+      //   this.setState({gallery: initialDisplay});
+      // })
     })
   }
 
@@ -44,7 +51,7 @@ class App extends Component {
     return `${firstName.join('')} ${lastName}`;
   }
 
-  //make functions to pass down
+  //get 12 additional artworks
   loadMoreArt () {
     let tempGallery = this.state.gallery;
     let dataToAppend = JSON.parse(localStorage.getItem('artists'))
@@ -83,7 +90,6 @@ class App extends Component {
   }
 
   backToHome() {
-
     const tempGallery = JSON.parse(localStorage.getItem('artists')).filter((element, index) => index < 12)
     this.setState({
       gallery: tempGallery,

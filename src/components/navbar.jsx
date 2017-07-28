@@ -12,9 +12,8 @@ const NavBar = (props) => {
         </div>
 
         <div id='searchBar'>
-          <input type="text" onChange={props.updateSearch} placeholder="Search Artist">
-            {/* {props.searchArtist} */}
-          </input>
+          <input type="text" onChange={props.updateSearch} placeholder="Search Artist"></input>
+
           <button id="searchSubmit" type='submit' onClick={() => {props.getArtist(props.searchField)}}>
              <img src="https://image.flaticon.com/icons/png/512/49/49116.png" alt="search"></img>
           </button>
