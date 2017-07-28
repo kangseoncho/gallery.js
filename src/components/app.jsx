@@ -9,7 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       gallery: [],
-      searchField: ''
+      searchField: '',
+      loadBatch: 1
     };
     //list of functions to pass down
     this.loadMoreArt = this.loadMoreArt.bind(this);
@@ -21,16 +22,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/initialGallery')
-    .then(res => {
-      this.setState({ gallery: res.data });
-    });
-
     axios.get('http://localhost:3000/ids')
     .then(res => localStorage.setItem('id', JSON.stringify(res.data)) )
     .then(res => {
       axios.get('http://localhost:3000/allArtist')
-      .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
+      .then(res => {
+        localStorage.setItem('artists', JSON.stringify(res.data))
+        return JSON.parse( localStorage.getItem('artists') );
+      })
+      .then(cachedInfo => {
+        //console.log("cached Info: ", cachedInfo)
+        const initialDisplay = cachedInfo.filter((info, index) => index < 12);
+        this.setState({gallery: initialDisplay});
+      })
     })
   }
 
@@ -42,12 +46,18 @@ class App extends Component {
 
   //make functions to pass down
   loadMoreArt () {
-    axios.get('http://localhost:3000/gallery')
-    .then(moreArts => {
-      let tempGallery = this.state.gallery;
-      tempGallery = tempGallery.concat(moreArts.data);
-
-      this.setState({ gallery: tempGallery });
+    let tempGallery = this.state.gallery;
+    let dataToAppend = JSON.parse(localStorage.getItem('artists'))
+      .filter((moreArtist, index) => {
+        return index >= (12 * this.state.loadBatch) && index < (12 * (this.state.loadBatch + 1));
+      })
+    // console.log("cachedArtInfo: ", JSON.parse(localStorage.getItem('artists')))
+    //console.log('newdata', dataToAppend)
+    tempGallery = tempGallery.concat(dataToAppend);
+    //console.log('new gallery after more loads: ', tempGallery)
+    this.setState({
+      gallery: tempGallery,
+      loadBatch: this.state.loadBatch + 1
     });
   }
 
@@ -73,12 +83,11 @@ class App extends Component {
   }
 
   backToHome() {
-    axios.get('http://localhost:3000/initialGallery')
-    .then(res => {
-      this.setState({
-        gallery: res.data,
-        searchField: ''
-      })
+
+    const tempGallery = JSON.parse(localStorage.getItem('artists')).filter((element, index) => index < 12)
+    this.setState({
+      gallery: tempGallery,
+      searchField: ''
     });
   }
 

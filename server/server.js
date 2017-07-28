@@ -18,12 +18,12 @@ app.get('/', (req, res) => { return });
 //get all list of IDs
 app.get('/ids', ArtWorkController.retrieveIDs);
 //set state for displaying initial artworks
-app.get('/initialGallery', ArtWorkController.retrieveInitialArts);
-//get additional artworks
-app.get('/gallery', ArtWorkController.retrieveArts);
-//search for requested artist
-app.get('/searchArtist', ArtWorkController.searchArtist);
-//cache all art info into local storage
+// app.get('/initialGallery', ArtWorkController.retrieveInitialArts);
+// //get additional artworks
+// app.get('/gallery', ArtWorkController.retrieveArts);
+// //search for requested artist
+// app.get('/searchArtist', ArtWorkController.searchArtist);
+// //cache all art info into local storage
 app.get('/allArtist', ArtWorkController.cachedArtInfo);
 
 

@@ -6,11 +6,11 @@ const Footer = (props) => {
       <div>
         {/* button to scroll to top of page */}
         <div id="scrollToTop">
-          <button onClick={() => { this.scrollToTop() }}>Top</button>
+          <button onClick={() => { props.scrollToTop() }}>Top</button>
         </div>
         {/* button to load more artworks */}
         <div id='loadImages'>
-          <button onClick={() => { this.loadMoreArt() }}>More Result</button>
+          <button onClick={() => { props.loadMoreArt() }}>More Result</button>
         </div>
       </div>
     )
@@ -19,7 +19,7 @@ const Footer = (props) => {
     <div>
       {/* button to scroll to top of page */}
       <div id="scrollToTop">
-        <button onClick={() => { this.scrollToTop() }}>Top</button>
+        <button onClick={() => { props.scrollToTop() }}>Top</button>
       </div>
     </div>
   )
