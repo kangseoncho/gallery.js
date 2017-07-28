@@ -33,94 +33,30 @@ const artWorkController = {
       if (err) return err;
       return res.json(result);
     });
+  },
+
+  retrieveInitialArts(req, res) {
+    function getRequest(url, callback) {
+      const options = {
+        url,
+        json: true
+      };
+      request(options, (err, res, body) => callback(err, body))
+    }
+    //initial request to get first 12 IDs
+    axios.get('https://appsheettest1.azurewebsites.net/sample/art/', { headers: { "Access-Control-Allow-Origin": "*" } })
+      .then(listOfIDs => {
+        return listOfIDs.data.sort((a, b) => a - b).filter((allIDs, index) => index < 12);
+      })
+      //use those IDs to create data for display
+      .then(filteredIDs => {
+        let idsToCall = filteredIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`)
+        async.map(idsToCall, getRequest, (err, result) => {
+          if (err) return err;
+          return res.json(result);
+        })
+      })
   }
-
-  // retrieveInitialArts(req, res) {
-  //   function getRequest(url, callback) {
-  //     const options = {
-  //       url,
-  //       json: true
-  //     };
-  //     request(options, (err, res, body) => callback(err, body))
-  //   }
-  //   //initial request to get first 12 IDs
-  //   axios.get('https://appsheettest1.azurewebsites.net/sample/art/', { headers: { "Access-Control-Allow-Origin": "*" } })
-  //     .then(listOfIDs => {
-  //       return listOfIDs.data.sort((a, b) => a - b).filter((allIDs, index) => index < 12);
-  //     })
-  //     //use those IDs to create data for display
-  //     .then(filteredIDs => {
-  //       app.locals.numberOfLoads = 12;
-  //       let idsToCall = filteredIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`)
-  //       async.map(idsToCall, getRequest, (err, result) => {
-  //         if (err) return err;
-  //         return res.json(result);
-  //       })
-  //     })
-  // },
-
-  // retrieveArts(req, res) {
-
-  //   function getRequest(url, callback) {
-  //     const options = {
-  //       url,
-  //       json: true
-  //     };
-  //     request(options, (err, res, body) => callback(err, body));
-  //   }
-  //   axios.get('https://appsheettest1.azurewebsites.net/sample/art/', { headers: { "Access-Control-Allow-Origin": "*" } })
-  //     .then(listOfIDs => {
-  //       //filter out 12 additional ids to use to get arts we want
-  //       return listOfIDs.data.sort((a, b) => a - b).filter((allIDs, index) => {
-  //         return index >= app.locals.numberOfLoads && index < 12 + app.locals.numberOfLoads;
-  //       })
-  //     })
-  //     //use those IDs to create data for display
-  //     .then(filteredIDs => {
-  //       app.locals.numberOfLoads += 12;
-  //       let idsToCall = filteredIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`)
-  //       async.map(idsToCall, getRequest, (err, result) => {
-  //         if (err) return err;
-  //         return res.json(result);
-  //       })
-  //     })
-  // },
-
-  // searchArtist (req, res) {
-  //   function getRequest(url, callback) {
-  //     const options = {
-  //       url,
-  //       json : true
-  //     };
-  //     request(options, (err, res, body) => callback(err, body));
-  //   }
-  //   axios.get('https://appsheettest1.azurewebsites.net/sample/art/', {headers: {"Access-Control-Allow-Origin": "*"}})
-  //   //use those IDs to create data for display
-  //   .then(filtered => filtered.data.sort((a,b) => a-b).filter(ids => ids < 1000))
-  //   .then(listOfIDs => {
-  //     let idsToCall = listOfIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`);
-  //     async.map(idsToCall, getRequest, (err, result) => {
-  //       if(err) return err;
-  //       return res.send(result);
-  //     })
-  //   })
-  // },
-
-  // searchArtist(req, res) {
-  //   function getRequest(url, callback) {
-  //     const options = {
-  //       url,
-  //       json: true
-  //     };
-  //     request(options, (err, res, body) => callback(err, body));
-  //   }
-  //   let idsToCall = app.locals.cachedIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`);
-  //   idsToCall = idsToCall.filter((element, index) => index < 100);
-  //   async.map(idsToCall, getRequest, (err, result) => {
-  //     if (err) return err;
-  //     return res.json(result);
-  //   })
-  // }
 
 }
 
