@@ -3,7 +3,10 @@ const async = require('async');
 const request = require('request');
 const app = require('express')();
 
+//keeps additional images loaded & index number for next load
 app.locals.numberOfLoads = 0;
+
+//cache IDs and information called with ID
 app.locals.cachedIDs;
 app.locals.cachedArtInfo;
 
@@ -27,7 +30,6 @@ const artWorkController = {
       };
       request(options, (err, res, body) => callback(err, body))
     }
-
     const filteredIDs = app.locals.cachedIDs.filter((allIDs, index) => index < 12);
     //use those IDs to create data for display
     app.locals.numberOfLoads = 12;
@@ -40,7 +42,6 @@ const artWorkController = {
   },
 
   retrieveAdditionalArts(req, res) {
-
     function getRequest(url, callback) {
       const options = {
         url,
@@ -54,17 +55,16 @@ const artWorkController = {
     })
     //use those IDs to create data for display
     app.locals.numberOfLoads += 12;
-    //add 12 more results to cache
     let idsToCall = filteredIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`)
     async.map(idsToCall, getRequest, (err, result) => {
       if (err) return err;
+      //add 12 more results to cache
       app.locals.cachedArtInfo = app.locals.cachedArtInfo.concat(result);
       return res.json(result);
     })
   },
 
   homePage(req, res) {
-    //console.log("express cached Art: ", app.locals.cachedArtInfo)
     return res.json(app.locals.cachedArtInfo);
   },
 
@@ -93,8 +93,9 @@ const artWorkController = {
       request(options, (err, res, body) => callback(err, body));
     }
     let idsToCall = app.locals.cachedIDs.map(id => `https://appsheettest1.azurewebsites.net/sample/art/${id}`);
-    //let filteredIDs = idsToCall.filter((element, index) => index < 50)
-    async.map(idsToCall, getRequest, (err, result) => {
+    //i had to limit because the number of httprequest would cause slowdown of application
+    let filteredIDs = idsToCall.filter((element, index) => index < 100)
+    async.map(filteredIDs, getRequest, (err, result) => {
       if (err) return err;
       return res.json(result);
     })

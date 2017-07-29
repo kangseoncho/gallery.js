@@ -7,8 +7,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const port = 3000;
 
-//app.locals.numberOfLoads = 0;
-
 app.use(bodyParser.json());
 
 //display website
