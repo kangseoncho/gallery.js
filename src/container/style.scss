@@ -54,8 +54,6 @@ body {
         button {
           background-color: white;
           border: none;
-          // height: 24px;
-          // width: 24px;
           font-size: 24px;
           cursor: pointer;
         }
@@ -85,7 +83,7 @@ body {
     width: 100%;
     display: flex;
     -webkit-flex-flow: row wrap;
-    justify-content: space-around; //or justify-content: space-around;
+    justify-content: space-around;
 
     //position: relative;
     margin: {
@@ -143,9 +141,6 @@ body {
 
   #modalContainer {
     display: flex;
-    // justify-content: space-between;
-    // align-items: flex-start;
-
     width: 100%;
 
     .modalContent {
@@ -161,10 +156,6 @@ body {
 
     #modalArt {
       width: 35%;
-      img {
-        // width: 100%;
-        // height: auto;
-      }
     }
 
     #artInformation {
@@ -264,7 +255,6 @@ body {
   }
 
   #gallery {
-    //position: relative;
     margin: {
       top: 15%;
     }
