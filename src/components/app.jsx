@@ -13,7 +13,7 @@ class App extends Component {
       showModal: false,
       infoForModal: {}
     };
-    //list of functions to pass down
+
     this.loadMoreArt = this.loadMoreArt.bind(this);
     this.artistName = this.artistName.bind(this);
     this.scrollToTop = this.scrollToTop.bind(this);
@@ -44,27 +44,22 @@ class App extends Component {
       .then(res => {
         this.setState({ gallery: res.data });
       })
+      //make local storage for artist queries
       .then(res => {
         axios.get('http://localhost:3000/allArtist')
         .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
       })
     })
-
-    // axios.get('http://localhost:3000/ids')
-    // .then(res => localStorage.setItem('id', JSON.stringify(res.data)) )
-    // .then(res => {
-    //   axios.get('http://localhost:3000/allArtist')
-    //   .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
-    // })
   }
 
+  //flip artist's name from 'lname, fname' to 'fname lname'
   artistName (string) {
     const firstName = string.replace(/, /, ',').split(',');
     const lastName = firstName.splice(0, 1);
     return `${firstName.join('')} ${lastName}`;
   }
 
-  //make functions to pass down
+  //get 12 more artworks
   loadMoreArt () {
     axios.get('http://localhost:3000/gallery')
     .then(moreArts => {
@@ -111,7 +106,7 @@ class App extends Component {
         <NavBar searchField={this.state.searchField} updateSearch={this.updateSearch} getArtist={this.getArtist}
           backToHome={this.backToHome} scrollToTop={this.scrollToTop}/>
 
-        {/*images*/}
+        {/*Gallery*/}
         <Image gallery={this.state.gallery} artistName={this.artistName}
           openModal={this.openModal} closeModal={this.closeModal} showModal={this.state.showModal} getInfoForModal={this.getInfoForModal}
           infoForModal={this.state.infoForModal} artistName={this.artistName}/>

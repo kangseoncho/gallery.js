@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ImageModal = (props) => {
-  // console.log("modal information", props.infoForModal)
   return (
     <div id="modalContainer">
       <div id="modalArt">
