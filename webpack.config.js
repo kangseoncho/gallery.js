@@ -38,10 +38,8 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      //change the value in stringify from development to productin when ready to launch
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    //uncomment once ready to go into production mode
-    //new webpack.optimize.UglifyJsPlugin()
+    new webpack.optimize.UglifyJsPlugin()
   ]
 }
