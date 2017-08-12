@@ -3,6 +3,7 @@
 Instruction on Starting Gallery.js
 
 1. clone the repository from Github: https://github.com/kangseoncho/gallery.js.git
+
 Use Command (git clone https://github.com/kangseoncho/gallery.js.git) in command line interface.
 
 2. navigate to the folder called "gallery.js"
