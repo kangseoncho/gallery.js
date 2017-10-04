@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -27,7 +27,7 @@ app.get('/allArtist', ArtWorkController.cachedArtInfo);
 app.get('/home', ArtWorkController.homePage);
 
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log("direectory name: ", __dirname);
   console.log(`listening on port ${port}!`);
 });
