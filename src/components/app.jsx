@@ -37,16 +37,16 @@ class App extends Component {
 
   componentDidMount() {
     //call the neccesary server routes to get initial info started
-    axios.get('http://localhost:3000/ids')
+    axios.get('./ids')
     .then(res => {
       localStorage.setItem('id', JSON.stringify(res.data));
-      axios.get('http://localhost:3000/initialGallery')
+      axios.get('./initialGallery')
       .then(res => {
         this.setState({ gallery: res.data });
       })
       //make local storage for artist queries
       .then(res => {
-        axios.get('http://localhost:3000/allArtist')
+        axios.get('./allArtist')
         .then(res => localStorage.setItem('artists', JSON.stringify(res.data)) );
       })
     })
@@ -61,7 +61,7 @@ class App extends Component {
 
   //get 12 more artworks
   loadMoreArt () {
-    axios.get('http://localhost:3000/gallery')
+    axios.get('./gallery')
     .then(moreArts => {
       let tempGallery = this.state.gallery;
       tempGallery = tempGallery.concat(moreArts.data);
@@ -90,7 +90,7 @@ class App extends Component {
 
   //back to the home page
   backToHome() {
-    axios.get('http://localhost:3000/home')
+    axios.get('./home')
     .then(res => {
       this.setState({
         gallery: res.data,
